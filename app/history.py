@@ -71,7 +71,6 @@ class HistoryManager:
             ensure_ascii=False,
             indent=2,
         )
-        # Atomik yazma: önce geçici dosyaya yazıp sonra değiştiriyoruz
         tmp_path = self.storage_path.with_suffix(".tmp")
         tmp_path.write_text(payload, encoding="utf-8")
         tmp_path.replace(self.storage_path)
@@ -90,7 +89,7 @@ class HistoryManager:
             segments=segments,
         )
         entries = self.load()
-        entries.insert(0, entry)  # En yeni kayıt en üstte
+        entries.insert(0, entry)  # newest first
         self._save(entries)
         return entry
 

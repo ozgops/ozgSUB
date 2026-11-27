@@ -23,27 +23,23 @@ def _register_cuda_dlls() -> None:
 
 @dataclass
 class TranscriptSegment:
-    """Çözümlenen tek bir altyazı parçasını temsil eder."""
     start: float
     end: float
     text: str
 
 
 class Transcriber:
-    """faster-whisper large-v3 kullanarak yerel İngilizce ses çözümleme yapar."""
 
     def __init__(self, model_size: str = "large-v3") -> None:
         self.model_size = model_size
         self._model: WhisperModel | None = None
 
     def _detect_device(self) -> tuple[str, str]:
-        """NVIDIA GPU (CUDA) varsa onu, yoksa CPU'yu otomatik seçer."""
         if ctranslate2.get_cuda_device_count() > 0:
             return "cuda", "float16"
         return "cpu", "int8"
 
     def load_model(self) -> None:
-        """Modeli yalnızca ilk gerektiğinde (lazy loading) belleğe yükler."""
         if self._model is not None:
             return
         _register_cuda_dlls()
@@ -55,7 +51,6 @@ class Transcriber:
     )
 
     def validate_audio_path(self, audio_path: str | Path) -> Path:
-        """Dosya yolunu güvenli şekilde doğrular."""
         path = Path(audio_path).expanduser().resolve()
         if not path.exists() or not path.is_file():
             raise FileNotFoundError(f"Audio file not found: {path}")
@@ -68,7 +63,6 @@ class Transcriber:
         audio_path: str | Path,
         on_progress: Callable[[float], None] | None = None,
     ) -> list[TranscriptSegment]:
-        """İngilizce ses dosyasını çözer ve zaman damgalı segment listesi döner."""
         path = self.validate_audio_path(audio_path)
         self.load_model()
         assert self._model is not None

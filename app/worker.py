@@ -4,7 +4,6 @@ from app.transcriber import Transcriber
 
 
 class TranscribeWorker(QThread):
-    """Ses çözümlemeyi arayüzü dondurmadan arka planda çalıştırır."""
 
     progress = Signal(int)
     finished = Signal(list)

@@ -1,15 +1,15 @@
-# Python sanal ortamı
+# Virtual env
 .venv/
 venv/
 
-# Python önbellek ve derleme dosyaları
+# Python cache
 __pycache__/
 *.py[cod]
 
-# Gizli ortam değişkenleri
+# Secrets
 .env
 
-# Yerel veri, geçmiş ve medya dosyaları (gizlilik ve boyut için)
+# Local data and media
 data/
 history.json
 *.db
@@ -22,7 +22,7 @@ history.json
 *.srt
 models/
 
-# Editör ve işletim sistemi dosyaları
+# Editor / OS
 .vscode/
 .idea/
 Thumbs.db

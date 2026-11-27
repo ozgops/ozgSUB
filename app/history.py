@@ -9,7 +9,6 @@ from app.transcriber import TranscriptSegment
 
 @dataclass
 class HistoryEntry:
-    """Yerel geçmişte saklanan tek bir çözümleme kaydı."""
     id: str
     created_at: str
     file_name: str
@@ -18,7 +17,6 @@ class HistoryEntry:
 
     @property
     def full_text(self) -> str:
-        """Tüm segmentleri tek bir metin olarak birleştirir."""
         return " ".join(seg.text for seg in self.segments)
 
     def to_dict(self) -> dict:
@@ -53,7 +51,6 @@ class HistoryEntry:
 
 
 class HistoryManager:
-    """Çözümleme geçmişini yerel JSON dosyasında güvenli şekilde yönetir."""
 
     def __init__(self, storage_path: str | Path = "data/history.json") -> None:
         self.storage_path = Path(storage_path).expanduser().resolve()

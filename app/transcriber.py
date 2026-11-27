@@ -10,7 +10,7 @@ from faster_whisper import WhisperModel
 ALLOWED_EXTENSIONS = {".mp3", ".wav", ".m4a", ".flac", ".ogg", ".mp4", ".mkv", ".webm"}
 
 def _register_cuda_dlls() -> None:
-    """Windows'ta .venv içindeki NVIDIA CUDA/cuDNN DLL klasörlerini tanıtır."""
+    """Register NVIDIA CUDA/cuDNN bin folders from the local venv on Windows."""
     if sys.platform != "win32":
         return
     nvidia_dir = Path(sys.prefix) / "Lib" / "site-packages" / "nvidia"
@@ -58,9 +58,9 @@ class Transcriber:
         """Dosya yolunu güvenli şekilde doğrular."""
         path = Path(audio_path).expanduser().resolve()
         if not path.exists() or not path.is_file():
-            raise FileNotFoundError(f"Ses dosyası bulunamadı: {path}")
+            raise FileNotFoundError(f"Audio file not found: {path}")
         if path.suffix.lower() not in ALLOWED_EXTENSIONS:
-            raise ValueError(f"Desteklenmeyen dosya türü: {path.suffix}")
+            raise ValueError(f"Unsupported file format: {path.suffix}")
         return path
 
     def transcribe(

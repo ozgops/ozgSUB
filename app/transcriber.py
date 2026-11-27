@@ -1,3 +1,5 @@
+import os
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -7,6 +9,17 @@ from faster_whisper import WhisperModel
 
 ALLOWED_EXTENSIONS = {".mp3", ".wav", ".m4a", ".flac", ".ogg", ".mp4", ".mkv", ".webm"}
 
+def _register_cuda_dlls() -> None:
+    """Windows'ta .venv içindeki NVIDIA CUDA/cuDNN DLL klasörlerini tanıtır."""
+    if sys.platform != "win32":
+        return
+    nvidia_dir = Path(sys.prefix) / "Lib" / "site-packages" / "nvidia"
+    if not nvidia_dir.exists():
+        return
+    for bin_dir in nvidia_dir.glob("*/bin"):
+        if bin_dir.is_dir():
+            os.add_dll_directory(str(bin_dir))
+            os.environ["PATH"] = str(bin_dir) + os.pathsep + os.environ.get("PATH", "")
 
 @dataclass
 class TranscriptSegment:
@@ -33,12 +46,13 @@ class Transcriber:
         """Modeli yalnızca ilk gerektiğinde (lazy loading) belleğe yükler."""
         if self._model is not None:
             return
+        _register_cuda_dlls()
         device, compute_type = self._detect_device()
         self._model = WhisperModel(
             self.model_size,
             device=device,
             compute_type=compute_type,
-        )
+    )
 
     def validate_audio_path(self, audio_path: str | Path) -> Path:
         """Dosya yolunu güvenli şekilde doğrular."""

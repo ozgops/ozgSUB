@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e2230"/>
+      <stop offset="100%" stop-color="#12141c"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="16" y1="12" x2="48" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#bg)" stroke="#2c3244" stroke-width="2"/>
+
+  <!-- Soundwave bars -->
+  <rect x="16" y="21" width="5" height="14" rx="2.5" fill="url(#wave)" opacity="0.75"/>
+  <rect x="25" y="14" width="5" height="24" rx="2.5" fill="url(#wave)"/>
+  <rect x="34" y="18" width="5" height="19" rx="2.5" fill="url(#wave)"/>
+  <rect x="43" y="23" width="5" height="11" rx="2.5" fill="url(#wave)" opacity="0.75"/>
+
+  <!-- Subtitle lines -->
+  <rect x="15" y="43" width="24" height="4" rx="2" fill="#f4f4f6"/>
+  <rect x="42" y="43" width="7" height="4" rx="2" fill="#3b82f6"/>
+  <rect x="15" y="50" width="16" height="3.5" rx="1.75" fill="#8c8c9a"/>
+</svg>

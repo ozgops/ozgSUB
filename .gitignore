@@ -1,0 +1,28 @@
+# Python sanal ortamı
+.venv/
+venv/
+
+# Python önbellek ve derleme dosyaları
+__pycache__/
+*.py[cod]
+
+# Gizli ortam değişkenleri
+.env
+
+# Yerel veri, geçmiş ve medya dosyaları (gizlilik ve boyut için)
+data/
+history.json
+*.db
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.ogg
+*.mp4
+*.srt
+models/
+
+# Editör ve işletim sistemi dosyaları
+.vscode/
+.idea/
+Thumbs.db
